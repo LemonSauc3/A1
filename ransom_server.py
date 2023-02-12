@@ -8,9 +8,13 @@ class ClientHandler(socketserver.BaseRequestHandler):
 
         #-----------------------------
         # Decryption Code Here
+
+
+
         #-----------------------------
 
         self.request.sendall("Send key back")
+
 
 if __name__ == "__main__":
     HOST, PORT = "", 8000

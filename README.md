@@ -16,3 +16,9 @@ openssl rsa -in pub_priv_pair.key  -pubout -out public_key.key
 ```
 
 - Both of the files need to be stored inside of a ./keys directory for the program to work correctly as there is no autmated directory search to find the key files.
+
+## Running the Application
+
+- Run the Server in a terminal
+- Inside of the SecretTextFile.txt put the contents of what you want encrypted.
+- Run the Client inside of another terminal for the contents to then be encrypted and in another file the contents to be decryoted.
